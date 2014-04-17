@@ -5,11 +5,8 @@ map(_F,[]) -> ([]);
 map(F, [H|T]) -> ([F(H) | map(F, T)]).
 
 filter(_F, []) -> [];
-filter(F, [H|T]) -> 
-	case F(H) of
-		true -> [H | filter(F,T)];
-		false -> filter(F,T)
-	end.
+filter(F, S) -> 
+	[X || X <- S, F(X)].
 
 flatten([]) -> [];
 flatten([H|T]) -> flatten(H) ++ flatten(T);
