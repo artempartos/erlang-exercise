@@ -1,8 +1,16 @@
 -module(mylist).
--export([map/2]).
+-export([map/2, filter/2]).
 
 map(_F,[]) -> ([]);
-map(F, [T|H]) -> ([F(T) | map(F, H)]).
+map(F, [H|T]) -> ([F(H) | map(F, T)]).
 
+filter(_F, []) -> [];
+filter(F, [H|T]) -> 
+	case F(H) of
+		true ->
+			[H | filter(F,T)];
+		false ->
+			filter(F,T)
+	end.
 
 
