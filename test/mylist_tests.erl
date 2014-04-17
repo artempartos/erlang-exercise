@@ -17,4 +17,14 @@ filter_with_origin_test() ->
 	F = fun(X) -> X rem 2 == 0 end,
 	X = [1,2,3,4,5],
 	?assertEqual(lists:filter(F,X), mylist:filter(F,X)).	
+
+flatten_test() ->
+	?assertEqual([1,2,3,4,5,6,7], mylist:flatten([1,[2,3],[],4,[5,[6,7]]])).		
+
+flatten_with_origin_test() -> 
+	X = [1,[2,3],[],4,[5,[6,7]]],
+	?assertEqual(lists:flatten(X), mylist:flatten(X)).			
+
+
+
 	
