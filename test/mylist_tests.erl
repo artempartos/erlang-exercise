@@ -33,6 +33,9 @@ reduce_with_origin_test() ->
 	X = [1,2,3,4,5],
 	?assertEqual(lists:foldl(F, 0, X), mylist:reduce(F,0,X)).			
 
+quick_sort_test() -> 
+	?assertEqual([1,2,4,8,11,12,34,54,90], mylist:quick_sort([34,12,54,1,4,11,8,2,90])).				
+
 
 
 

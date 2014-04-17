@@ -1,5 +1,5 @@
 -module(mylist).
--export([map/2, filter/2, flatten/1, reduce/3]).
+-export([map/2, filter/2, flatten/1, reduce/3, quick_sort/1]).
 
 map(_F,[]) -> ([]);
 map(F, [H|T]) -> ([F(H) | map(F, T)]).
@@ -17,3 +17,7 @@ flatten(El) -> [El].
 
 reduce(_F, Ac, []) -> Ac;
 reduce(F, Ac, [H|T]) -> reduce(F, F(H, Ac), T).
+
+quick_sort([]) -> [];
+quick_sort([H|T]) -> 
+	quick_sort([X || X <- T, X =< H]) ++ [H] ++ quick_sort([X || X <- T, X > H]).
