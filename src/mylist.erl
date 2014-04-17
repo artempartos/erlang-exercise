@@ -1,5 +1,5 @@
 -module(mylist).
--export([map/2, filter/2, flatten/1]).
+-export([map/2, filter/2, flatten/1, reduce/3]).
 
 map(_F,[]) -> ([]);
 map(F, [H|T]) -> ([F(H) | map(F, T)]).
@@ -15,3 +15,5 @@ flatten([]) -> [];
 flatten([H|T]) -> flatten(H) ++ flatten(T);
 flatten(El) -> [El].
 
+reduce(_F, Ac, []) -> Ac;
+reduce(F, Ac, [H|T]) -> reduce(F, F(H, Ac), T).

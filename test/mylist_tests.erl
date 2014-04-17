@@ -25,6 +25,15 @@ flatten_with_origin_test() ->
 	X = [1,[2,3],[],4,[5,[6,7]]],
 	?assertEqual(lists:flatten(X), mylist:flatten(X)).			
 
+reduce_test() ->
+	?assertEqual(15, mylist:reduce(fun(X, Sum) -> X + Sum end, 0, [1,2,3,4,5] )).			
+
+reduce_with_origin_test() -> 
+	F =  fun(X, Sum) -> X + Sum end,
+	X = [1,2,3,4,5],
+	?assertEqual(lists:foldl(F, 0, X), mylist:reduce(F,0,X)).			
+
+
 
 
 	
