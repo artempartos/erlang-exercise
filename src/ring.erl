@@ -1,7 +1,9 @@
 -module(ring).
--export([start/1, loop/2, send/3]).
+-export([start/1, kill/1, loop/2, send/3]).
 
 start(Count) -> spawn(ring, loop,[Count-1, self()]).
+
+kill(Pid) -> Pid ! {die}.
 
 send(Pid, Msg, Count) ->
 	Pid ! {message, Msg, Count, self()},
@@ -25,5 +27,8 @@ wait_message(Pid, FirstPid) ->
 			wait_message(Pid, FirstPid);
 	    {message, Msg, Count, FirstPid} ->
 			Pid ! {message, Msg, Count - 1, FirstPid},
-		    wait_message(Pid, FirstPid)
+		    wait_message(Pid, FirstPid);
+		{die} ->
+			Pid ! {die},
+			io:format("~p died MUHAHA~n", [self()])
     end.
