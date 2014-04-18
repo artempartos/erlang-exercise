@@ -43,10 +43,10 @@ read_test() ->
   ?assertEqual([{k2, v2}, {k1, v1}], State2),
 
   Val1 = db:read(State2, k3),
-  ?assertEqual(nil, Val1),
+  ?assertEqual({error, keynotexist}, Val1),
 
   Val2 = db:read(State2, k1),
-  ?assertEqual(v1, Val2).
+  ?assertEqual({ok, v1}, Val2).
 
 values_test() ->
   Db = db:new(),

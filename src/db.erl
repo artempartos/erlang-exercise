@@ -10,8 +10,8 @@ write(Db, K, V) -> [{K,V} | filter_key(Db, K)].
 
 delete(Db, K) -> filter_key(Db, K).
 
-read([], _K) -> nil;
-read([{K, V}|_T], K) -> V;
+read([], _K) -> {error, keynotexist};
+read([{K, V}|_T], K) -> {ok, V};
 read([_ | T], K) -> read(T,K).
 
 filter_key(Db, K) -> [{K1,_V} || {K1, _V} <- Db, K1 /= K].
