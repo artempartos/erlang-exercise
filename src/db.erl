@@ -6,15 +6,15 @@ new() -> [].
 
 destroy(_Db) -> ok.
 
-write(Db, K, V) -> [{K,V} | filter_key(Db, K)].
+write(Db, K, V) -> [{K,V} | delete_key(Db, K)].
 
-delete(Db, K) -> filter_key(Db, K).
+delete(Db, K) -> delete_key(Db, K).
 
 read([], _K) -> {error, keynotexist};
 read([{K, V}|_T], K) -> {ok, V};
 read([_ | T], K) -> read(T,K).
 
-filter_key(Db, K) -> [{K1,_V} || {K1, _V} <- Db, K1 /= K].
+delete_key(Db, K) -> [{K1,_V} || {K1, _V} <- Db, K1 /= K].
 
 values([], _V) -> [];
 values([{K, V} | T], V) -> [K | values(T,V)];
