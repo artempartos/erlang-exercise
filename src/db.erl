@@ -14,14 +14,14 @@ delete(Db, K) ->
 
 read([], _K) -> nil;
 read([{K, V}|_T], K) -> V;
-read([_H|T], K) -> read(T,K).
+read([_H | T], K) -> read(T,K).
 
 filter_key(Db, K) ->
 	[{K1,_V} || {K1, _V} <- Db, K1 /= K].
 
 values([], _V) -> [];
-values([{K, V}|T], V) -> [K] ++ values(T,V);
-values([_H|T], V) -> values(T,V).
+values([{K, V} | T], V) -> [K] ++ values(T,V);
+values([_H | T], V) -> values(T,V).
 
 
 
