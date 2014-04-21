@@ -11,7 +11,7 @@ up_phone(Pid) ->
 		{ok, idle} ->
 			{ok, idle}
 	after 500 ->
-		{error, timeout}
+		{ok, unprocessable}
 	end.
 
 call(Pid) -> 
@@ -20,7 +20,7 @@ call(Pid) ->
         {ok, connected} ->
             {ok, connected}
     after 500 ->
-        {error, timeout}
+        {ok, unprocessable}
     end.
 
 say(Pid) -> 
@@ -29,7 +29,7 @@ say(Pid) ->
         {ok, said} ->
             {ok, said}
     after 500 ->
-        {error, timeout}
+        {ok, unprocessable}
     end.    
 
 down(Pid) -> 
@@ -38,7 +38,7 @@ down(Pid) ->
         {ok, on_hook} ->
             {ok, on_hook}
     after 500 ->
-        {error, timeout}
+        {ok, unprocessable}
     end.
 
 on_hook() ->
